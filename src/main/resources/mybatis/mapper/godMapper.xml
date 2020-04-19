@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.xkx.mapper.GodMapper">
+    <select id="isExist" parameterType="String" resultType="Integer">
+        select count(*) from god where count=#{count}
+    </select>
+
+    <insert id="addGod" parameterType="god">
+        insert into god (name,count,Password,headImg) values (#{name},#{count},#{Password},'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png')
+    </insert>
+
+    <delete id="deleteGod" parameterType="String" >
+        delete god where godid=#{godid}
+    </delete>
+
+    <select id="selectGodByCount" parameterType="String" resultType="god">
+        select * from god where count=#{count}
+    </select>
+
+    <select id="selectGodById" parameterType="Integer" resultType="god">
+        select id,count,name,email,url,introduction,headImg from god where id=#{id}
+    </select>
+
+    <update id="godUpdateById" parameterType="god">
+        update god set name=#{name},email=#{email},url=#{url},introduction=#{introduction} where id=#{id}
+    </update>
+
+    <update id="setHeadUrl" parameterType="Map">
+        update god set headImg=#{headImg} where id=#{id}
+    </update>
+</mapper>

@@ -1,0 +1,32 @@
+#配置druid
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/test?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: xkx
+    password: qq10086..
+    type: com.alibaba.druid.pool.DruidDataSource
+    #   数据源其他配置
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    #每个数据库都不一样的 注意要
+    validationQuery: SELECT 1
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    #   配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+    filters: stat,wall,log4j
+    maxPoolPreparedStatementPerConnectionSize: 20
+    useGlobalDataSourceStat: true
+    #慢SQL记录 如果上面validationQuery: SELECT 1 没有配置，而你配置了就会报错null
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+#配置mybatis
+mybatis:
+  type-aliases-package: org.xkx.pojo
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  
