@@ -44,7 +44,7 @@ public class GodController {
     public Result headImg(@RequestParam("img") MultipartFile file,@RequestParam("headid") int headid){
         Map<String, String> sftpDetails = new HashMap<String, String>();
         // 设置主机ip，端口，用户名，密码
-        sftpDetails.put(SFTPConstants.SFTP_REQ_HOST, "129.211.56.158");
+        sftpDetails.put(SFTPConstants.SFTP_REQ_HOST, "www.xkxxkx.cn");
         sftpDetails.put(SFTPConstants.SFTP_REQ_USERNAME, "root");
         sftpDetails.put(SFTPConstants.SFTP_REQ_PASSWORD, "qq10086..");
         sftpDetails.put(SFTPConstants.SFTP_REQ_PORT, "22");
@@ -63,6 +63,8 @@ public class GodController {
         try {
             ChannelSftp chSftp = channel.getChannel(sftpDetails, 60000);
             chSftp.put(inputStream, dst, ChannelSftp.OVERWRITE);
+            String substring = iGodService.selectGodById(headid).getHeadImg().substring(33);
+            chSftp.rm("/opt/apache-tomcat-9.0.33/webapps/upload/"+substring);
         } catch (JSchException e) {
             e.printStackTrace();
             return new Result("系统错误,上传失败");
@@ -70,7 +72,7 @@ public class GodController {
             e.printStackTrace();
             return new Result("系统错误,上传失败");
         }
-        String headImg="http://129.211.56.158:8080/upload/"+headid+"的"+k+file.getOriginalFilename();
+        String headImg="http://www.xkxxkx.cn:8080/upload/"+headid+"的"+k+file.getOriginalFilename();
         Map<Object, Object> headMap = new HashMap<>();
         headMap.put("id",headid);
         headMap.put("headImg",headImg);

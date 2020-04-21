@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.xkx.mapper.ArticleImgMapper">
+    <insert id="addImg">
+        insert into articleImg values (#{url},#{uid})
+    </insert>
+    <select id="selectImgByUid" parameterType="Integer" resultType="String">
+        select url from articleImg where uid=#{uid}
+    </select>
+    <delete id="deleteUrl" parameterType="String">
+        delete from articleImg where url=#{url}
+    </delete>
+</mapper>

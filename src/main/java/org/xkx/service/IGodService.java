@@ -19,4 +19,5 @@ public interface IGodService {
     String addGod(god god);
 
     void setHeadUrl(Map headMap);
+
 }

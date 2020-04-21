@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.xkx.mapper.ArticleMapper">
+    <select id="selectMax" resultType="Integer">
+        select MAX(aid) from article
+    </select>
+    <insert id="addArticle" parameterType="article">
+        insert into article values (#{aid},#{title},#{content},#{uid},#{time})
+    </insert>
+
+    <select id="selectArticle" parameterType="Integer" resultType="article">
+        select * from article where uid=#{uid}
+    </select>
+</mapper>
