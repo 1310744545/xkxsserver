@@ -7,10 +7,45 @@
         select MAX(aid) from article
     </select>
     <insert id="addArticle" parameterType="article">
-        insert into article values (#{aid},#{title},#{content},#{uid},#{time})
+        insert into article values (#{aid},#{title},#{content},#{uid},#{time},#{comment},#{praise},#{read})
     </insert>
 
     <select id="selectArticle" parameterType="Integer" resultType="article">
         select * from article where uid=#{uid}
     </select>
+
+    <select id="selectArticleDetail" parameterType="Integer" resultType="article">
+        select * from article where aid=#{aid}
+    </select>
+
+    <update id="articleReadPlus" parameterType="Integer">
+        UPDATE article set `read`=`read`+1 where aid=#{aid}
+    </update>
+
+    <update id="praise" parameterType="Integer">
+        UPDATE article set `praise`=`praise`+1 where aid=#{aid}
+    </update>
+
+    <update id="comment" parameterType="Integer">
+        UPDATE article set `comment`=`comment`+1 where aid=#{aid}
+    </update>
+
+    <select id="selectAllArticle" resultMap="article-god">
+        select * from article inner join god on god.id=article.uid
+    </select>
+
+    <resultMap id="article-god" type="article">
+        <id property="aid" column="aid"></id>
+        <result property="title" column="title"></result>
+        <result property="content" column="content"></result>
+        <result property="time" column="time"></result>
+        <result property="comment" column="comment"></result>
+        <result property="praise" column="praise"></result>
+        <result property="read" column="read"></result>
+        <association property="god" javaType="god">
+        <id property="id" column="id"></id>
+        <result property="name" column="name"></result>
+        <result property="headImg" column="headImg"></result>
+        </association>
+    </resultMap>
 </mapper>

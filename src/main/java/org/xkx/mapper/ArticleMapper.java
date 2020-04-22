@@ -14,4 +14,14 @@ public interface ArticleMapper {
     void addArticle(article article);
 
     List<article> selectArticle(int uid);
+
+    article selectArticleDetail(int aid);
+
+    void articleReadPlus(int aid);
+
+    void praise(int aid);
+
+    void comment(int aid);
+
+    List<article> selectAllArticle();
 }

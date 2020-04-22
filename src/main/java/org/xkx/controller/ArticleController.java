@@ -68,7 +68,7 @@ public class ArticleController {
     @CrossOrigin
     @ResponseBody
     @RequestMapping("/addArticle")
-    public String addArtical(@RequestBody article article){
+    public String addArticle(@RequestBody article article){
         Map<String, String> sftpDetails = new HashMap<String, String>();
         // 设置主机ip，端口，用户名，密码
         sftpDetails.put(SFTPConstants.SFTP_REQ_HOST, "www.xkxxkx.cn");
@@ -99,7 +99,7 @@ public class ArticleController {
                 }
             }
         }
-        org.xkx.pojo.article newarticle = new article(uid, article.getTitle(), article.getContent(), article.getUid(), dateStr);
+        org.xkx.pojo.article newarticle = new article(uid, article.getTitle(), article.getContent(), article.getUid(), dateStr,0,0,0);
         iArticleService.addArticle(newarticle);
         return "成功";
     }
@@ -109,6 +109,29 @@ public class ArticleController {
     @RequestMapping("/selectArticle")
     public List<article> selectArticle(@RequestBody article article){
         List<org.xkx.pojo.article> articles = iArticleService.selectArticle(article.getUid());
+        return articles;
+    }
+
+    @CrossOrigin
+    @ResponseBody
+    @RequestMapping("/selectArticleDetail")
+    public article selectArticleDetail(@RequestBody article article){
+        iArticleService.articleReadPlus(article.getAid());
+        return iArticleService.selectArticleDetail(article.getAid());
+    }
+
+    @CrossOrigin
+    @ResponseBody
+    @RequestMapping("/praise")
+    public void praise(@RequestBody article article){
+        iArticleService.praise(article.getAid());
+    }
+
+    @CrossOrigin
+    @ResponseBody
+    @RequestMapping("/selectAllArticle")
+    public List<article> selectAllArticle(){
+        List<article> articles = iArticleService.selectAllArticle();
         return articles;
     }
 }

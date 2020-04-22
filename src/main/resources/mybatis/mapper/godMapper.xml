@@ -8,7 +8,7 @@
     </select>
 
     <insert id="addGod" parameterType="god">
-        insert into god (name,count,Password,headImg) values (#{name},#{count},#{Password},'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png')
+        insert into god (name,count,Password,headImg,url,introduction) values (#{name},#{count},#{Password},'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',#{url},#{introduction})
     </insert>
 
     <delete id="deleteGod" parameterType="String" >

@@ -59,6 +59,8 @@ public class LoginController {
         God.setCount(god.getCount());
         God.setPassword(Result);
         God.setName(god.getName());
+        God.setUrl("空空如也");
+        God.setIntroduction("空空如也");
         return iGodService.addGod(God);
     }
 

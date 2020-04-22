@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.xkx.mapper.CommentMapper">
+    <insert id="addComment" parameterType="comment">
+        insert into comment values (#{cid},#{comment},#{aid},#{time},#{god.id})
+    </insert>
+
+    <select id="selectMaxCid" resultType="Integer">
+        select MAX(cid) from comment
+    </select>
+
+    <select id="selectAllCommentByAid" parameterType="Integer" resultMap="comment-god">
+        select * from comment inner JOIN god on comment.uid=god.id where aid=#{aid}
+    </select>
+
+    <resultMap id="comment-god" type="comment">
+        <id property="cid" column="cid"></id>
+        <result property="comment" column="comment"></result>
+        <result property="aid" column="aid"></result>
+        <result property="time" column="time"></result>
+        <association property="god" javaType="god">
+            <id property="id" column="id"></id>
+            <result property="name" column="name"></result>
+            <result property="headImg" column="headImg"></result>
+        </association>
+    </resultMap>
+</mapper>
