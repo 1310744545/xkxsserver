@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.xkx.mapper.MovieMapper">
+    <select id="selectMovies" resultType="movie">
+        select movieId,movieName,movieImg from movie
+    </select>
+    
+    <select id="selectMovieDetailByMovieId" parameterType="Integer" resultMap="movie_movieContent">
+        select * from movie join moviecontent on movie.movieId=moviecontent.movieId where movie.movieId=#{movieId}
+    </select>
+
+    <resultMap id="movie_movieContent" type="movie">
+        <result property="movieId" column="movieId"></result>
+        <result property="movieName" column="movieName"></result>
+        <result property="movieImg" column="movieImg"></result>
+        <result property="directors" column="directors"></result>
+        <result property="screenWriters" column="screenWriters"></result>
+        <result property="stars" column="stars"></result>
+        <result property="type" column="type"></result>
+        <result property="score" column="score"></result>
+        <result property="IMDb" column="IMDb"></result>
+        <result property="introduction" column="introduction"></result>
+            <collection property="movieContents" ofType="movieContent">
+                <result property="movieId" column="movieId"></result>
+                <result property="contentId" column="contentId"></result>
+                <result property="contentUrl" column="contentUrl"></result>
+            </collection>
+    </resultMap>
+</mapper>

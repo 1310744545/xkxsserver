@@ -10,4 +10,7 @@ public interface ICommentService {
     int selectMaxCid();
 
     List<comment> selectAllCommentByAid(int aid);
+
+    void replyPlus(int cid);
+
 }

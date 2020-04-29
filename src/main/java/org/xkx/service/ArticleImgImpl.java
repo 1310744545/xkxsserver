@@ -18,8 +18,8 @@ public class ArticleImgImpl implements IArticleImgServer {
     }
 
     @Override
-    public List<String> selectImgByUid(int uid) {
-        return articleImgMapper.selectImgByUid(uid);
+    public List<String> selectImgByAid(int aid) {
+        return articleImgMapper.selectImgByAid(aid);
     }
 
     @Override

@@ -11,7 +11,7 @@ import java.util.List;
 public interface ArticleImgMapper {
     void addImg(articleImg articleImg);
 
-    List<String> selectImgByUid(int uid);
+    List<String> selectImgByAid(int aid);
 
     void deleteUrl(String url);
 }

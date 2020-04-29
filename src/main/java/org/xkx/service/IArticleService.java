@@ -21,4 +21,12 @@ public interface IArticleService {
     void comment(int aid);
 
     List<article> selectAllArticle();
+
+    List<article> selectArticleAndGodByUid(int uid);
+
+    void deleteArticle(int aid);
+
+    article selectArticleByAid(int aid);
+
+    void updateArticle(article article);
 }

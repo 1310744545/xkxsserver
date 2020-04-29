@@ -34,6 +34,9 @@
         select * from article inner join god on god.id=article.uid
     </select>
 
+    <select id="selectArticleAndGodByUid" parameterType="Integer" resultMap="article-god">
+        select * from article inner join god on god.id=article.uid where Uid=#{uid}
+    </select>
     <resultMap id="article-god" type="article">
         <id property="aid" column="aid"></id>
         <result property="title" column="title"></result>
@@ -43,9 +46,20 @@
         <result property="praise" column="praise"></result>
         <result property="read" column="read"></result>
         <association property="god" javaType="god">
-        <id property="id" column="id"></id>
-        <result property="name" column="name"></result>
-        <result property="headImg" column="headImg"></result>
+            <id property="id" column="id"></id>
+            <result property="name" column="name"></result>
+            <result property="headImg" column="headImg"></result>
+            <result property="email" column="email"></result>
+            <result property="url" column="url"></result>
+            <result property="introduction" column="introduction"></result>
         </association>
     </resultMap>
+
+    <delete id="deleteArticle" parameterType="Integer">
+    delete article,comment,reply from article LEFT JOIN comment on article.aid=comment.aid LEFT JOIN reply on comment.cid=reply.cid  where article.aid=#{aid}
+    </delete>
+
+    <update id="updateArticle" parameterType="article">
+        update article set title=#{title},content=#{content} where aid=#{aid}
+    </update>
 </mapper>

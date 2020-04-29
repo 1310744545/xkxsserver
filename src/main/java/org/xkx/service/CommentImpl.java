@@ -26,4 +26,12 @@ public class CommentImpl implements ICommentService {
     public List<comment> selectAllCommentByAid(int aid) {
         return commentMapper.selectAllCommentByAid(aid);
     }
+
+    @Override
+    public void replyPlus(int cid) {
+        commentMapper.replyPlus(cid);
+    }
+
+
+
 }

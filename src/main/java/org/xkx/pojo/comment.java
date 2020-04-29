@@ -5,14 +5,16 @@ public class comment {
     private String comment;
     private int aid;
     private long time;
+    private int replys;
     private god god;
 
 
-    public comment(int cid, String comment, int aid, long time, god god) {
+    public comment(int cid, String comment, int aid, long time,int replys, god god) {
         this.cid=cid;
         this.comment = comment;
         this.aid = aid;
         this.time = time;
+        this.replys=replys;
         this.god = god;
     }
     public comment(String comment, int aid,god god) {
@@ -25,6 +27,13 @@ public class comment {
     }
 
 
+    public int getReplys() {
+        return replys;
+    }
+
+    public void setReplys(int replys) {
+        this.replys = replys;
+    }
 
     public int getCid() {
         return cid;

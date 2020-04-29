@@ -64,7 +64,9 @@ public class GodController {
             ChannelSftp chSftp = channel.getChannel(sftpDetails, 60000);
             chSftp.put(inputStream, dst, ChannelSftp.OVERWRITE);
             String substring = iGodService.selectGodById(headid).getHeadImg().substring(33);
-            chSftp.rm("/opt/apache-tomcat-9.0.33/webapps/upload/"+substring);
+            if(!substring.equals("a6beec64369c2642b92c6726f1epng.png")){
+                chSftp.rm("/opt/apache-tomcat-9.0.33/webapps/upload/"+substring);
+            }
         } catch (JSchException e) {
             e.printStackTrace();
             return new Result("系统错误,上传失败");
@@ -82,3 +84,4 @@ public class GodController {
     }
 
 }
+

@@ -54,5 +54,23 @@ public class ArticleImpl implements IArticleService {
        return articleMapper.selectAllArticle();
     }
 
+    @Override
+    public List<article> selectArticleAndGodByUid(int uid) {
+        return articleMapper.selectArticleAndGodByUid(uid);
+    }
 
+    @Override
+    public void deleteArticle(int aid) {
+        articleMapper.deleteArticle(aid);
+    }
+
+    @Override
+    public article selectArticleByAid(int aid) {
+        return articleMapper.selectArticleDetail(aid);
+    }
+
+    @Override
+    public void updateArticle(article article) {
+        articleMapper.updateArticle(article);
+    }
 }

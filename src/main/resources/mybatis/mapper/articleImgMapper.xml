@@ -4,10 +4,10 @@
 
 <mapper namespace="org.xkx.mapper.ArticleImgMapper">
     <insert id="addImg">
-        insert into articleImg values (#{url},#{uid})
+        insert into articleImg values (#{url},#{aid})
     </insert>
-    <select id="selectImgByUid" parameterType="Integer" resultType="String">
-        select url from articleImg where uid=#{uid}
+    <select id="selectImgByAid" parameterType="Integer" resultType="String">
+        select url from articleImg where aid=#{aid}
     </select>
     <delete id="deleteUrl" parameterType="String">
         delete from articleImg where url=#{url}

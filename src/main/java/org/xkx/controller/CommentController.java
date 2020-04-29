@@ -25,7 +25,7 @@ public class CommentController {
         comment.setCid(cid);
         Long startTs = System.currentTimeMillis();
         comment.setTime(startTs);
-
+        comment.setReplys(0);
         iCommentService.addComment(comment);
         iArticleService.comment(comment.getAid());
         return iCommentService.selectAllCommentByAid(comment.getAid());

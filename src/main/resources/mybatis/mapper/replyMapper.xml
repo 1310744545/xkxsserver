@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.xkx.mapper.ReplyMapper">
+    <insert id="addReply" parameterType="reply">
+        insert into reply values (#{content},#{cid},#{fromId},#{toId},#{time},#{fromName},#{toName},#{fromImg})
+    </insert>
+    
+    <select id="selectReply" parameterType="Integer" resultType="reply">
+        select * FROM reply WHERE cid=#{cid}
+    </select>
+
+</mapper>

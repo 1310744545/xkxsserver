@@ -4,7 +4,7 @@
 
 <mapper namespace="org.xkx.mapper.CommentMapper">
     <insert id="addComment" parameterType="comment">
-        insert into comment values (#{cid},#{comment},#{aid},#{time},#{god.id})
+        insert into comment values (#{cid},#{comment},#{aid},#{time},#{god.id},#{replys})
     </insert>
 
     <select id="selectMaxCid" resultType="Integer">
@@ -20,10 +20,16 @@
         <result property="comment" column="comment"></result>
         <result property="aid" column="aid"></result>
         <result property="time" column="time"></result>
+        <result property="replys" column="replys"></result>
         <association property="god" javaType="god">
             <id property="id" column="id"></id>
             <result property="name" column="name"></result>
             <result property="headImg" column="headImg"></result>
         </association>
     </resultMap>
+
+    <update id="replyPlus" parameterType="Integer">
+        update comment set replys=replys+1 where cid=#{cid}
+    </update>
+
 </mapper>

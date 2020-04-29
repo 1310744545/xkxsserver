@@ -2,11 +2,11 @@ package org.xkx.pojo;
 
 public class articleImg {
     private String url;
-    private int uid;
+    private int aid;
 
-    public articleImg(String url, int uid) {
+    public articleImg(String url, int aid) {
         this.url = url;
-        this.uid = uid;
+        this.aid = aid;
     }
 
     public articleImg() {
@@ -20,11 +20,11 @@ public class articleImg {
         this.url = url;
     }
 
-    public int getUid() {
-        return uid;
+    public int getAid() {
+        return aid;
     }
 
-    public void setUid(int uid) {
-        this.uid = uid;
+    public void setAid(int aid) {
+        this.aid = aid;
     }
 }

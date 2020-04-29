@@ -14,4 +14,7 @@ public interface CommentMapper {
     int selectMaxCid();
 
     List<comment> selectAllCommentByAid(int aid);
+
+    void replyPlus(int cid);
+
 }
