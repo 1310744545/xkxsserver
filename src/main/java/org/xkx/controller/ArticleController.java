@@ -88,25 +88,27 @@ public class ArticleController {
         Date date = new Date();
         String dateStr = sdf.format(date);
         int aid= iArticleService.selectMax()+1;
-        List <String> urlList=iArticleImgServer.selectImgByAid(aid);
-
-        for (String url :urlList){
-            if (article.getContent().indexOf(url)==-1){
-                String trueurl=url.substring(34);
-                iArticleImgServer.deleteUrl(url);
-                try{
-                    chSftp = channel.getChannel(sftpDetails, 60000);
-                    chSftp.rm("/opt/apache-tomcat-9.0.33/webapps/article/"+trueurl);
-                    channel.closeChannel();
-                }catch (SftpException e){
-                    return "失败,系统错误";
-                } catch (JSchException e) {
-                    return "失败,系统错误";
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+//        List <String> urlList=iArticleImgServer.selectImgByAid(aid);
+//        if(urlList!=null){
+//            for (String url :urlList){
+//                if (article.getContent().indexOf(url)==-1){
+//                    String trueurl=url.substring(34);
+//                    iArticleImgServer.deleteUrl(url);
+//                    try{
+//                        chSftp = channel.getChannel(sftpDetails, 60000);
+//                        chSftp.rm("/opt/apache-tomcat-9.0.33/webapps/article/"+trueurl);
+//                        channel.closeChannel();
+//                    }catch (SftpException e){
+//                        return "失败,系统错误";
+//                    } catch (JSchException e) {
+//                        return "失败,系统错误";
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//
+//        }
         org.xkx.pojo.article newarticle = new article(aid, article.getTitle(), article.getContent(), article.getUid(), dateStr,0,0,0);
         iArticleService.addArticle(newarticle);
         return "成功";
@@ -155,33 +157,33 @@ public class ArticleController {
     @RequestMapping("/deleteArticle")
     public void deleteArticle(@RequestBody article article){
         iArticleService.deleteArticle(article.getAid());
-        Map<String, String> sftpDetails = new HashMap<String, String>();
-        // 设置主机ip，端口，用户名，密码
-        sftpDetails.put(SFTPConstants.SFTP_REQ_HOST, "www.xkxxkx.cn");
-        sftpDetails.put(SFTPConstants.SFTP_REQ_USERNAME, "root");
-        sftpDetails.put(SFTPConstants.SFTP_REQ_PASSWORD, "qq10086..");
-        sftpDetails.put(SFTPConstants.SFTP_REQ_PORT, "22");
-        SFTPChannel channel = new SFTPChannel();
-        ChannelSftp chSftp = null;
+//        Map<String, String> sftpDetails = new HashMap<String, String>();
+//        // 设置主机ip，端口，用户名，密码
+//        sftpDetails.put(SFTPConstants.SFTP_REQ_HOST, "www.xkxxkx.cn");
+//        sftpDetails.put(SFTPConstants.SFTP_REQ_USERNAME, "root");
+//        sftpDetails.put(SFTPConstants.SFTP_REQ_PASSWORD, "qq10086..");
+//        sftpDetails.put(SFTPConstants.SFTP_REQ_PORT, "22");
+//        SFTPChannel channel = new SFTPChannel();
+//        ChannelSftp chSftp = null;
 
-        List <String> urlList=iArticleImgServer.selectImgByAid(article.getAid());
-        for (String url :urlList){
-                String trueurl=url.substring(34);
-                iArticleImgServer.deleteUrl(url);
-                try{
-                    chSftp = channel.getChannel(sftpDetails, 60000);
-                    chSftp.rm("/opt/apache-tomcat-9.0.33/webapps/article/"+trueurl);
-                    channel.closeChannel();
-                }catch (SftpException e){
-                    e.printStackTrace();
-                    System.out.println(123);
-                } catch (JSchException e) {
-                    e.printStackTrace();
-                    System.out.println(456);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-        }
+//        List <String> urlList=iArticleImgServer.selectImgByAid(article.getAid());
+//        for (String url :urlList){
+//                String trueurl=url.substring(34);
+//                iArticleImgServer.deleteUrl(url);
+//                try{
+//                    chSftp = channel.getChannel(sftpDetails, 60000);
+//                    chSftp.rm("/opt/apache-tomcat-9.0.33/webapps/article/"+trueurl);
+//                    channel.closeChannel();
+//                }catch (SftpException e){
+//                    e.printStackTrace();
+//                    System.out.println(123);
+//                } catch (JSchException e) {
+//                    e.printStackTrace();
+//                    System.out.println(456);
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//        }
     }
 
     @CrossOrigin
@@ -231,35 +233,35 @@ public class ArticleController {
     @ResponseBody
     @RequestMapping("/updateArticle")
     public void updateArticle(@RequestBody article article){
-        Map<String, String> sftpDetails = new HashMap<String, String>();
-        // 设置主机ip，端口，用户名，密码
-        sftpDetails.put(SFTPConstants.SFTP_REQ_HOST, "www.xkxxkx.cn");
-        sftpDetails.put(SFTPConstants.SFTP_REQ_USERNAME, "root");
-        sftpDetails.put(SFTPConstants.SFTP_REQ_PASSWORD, "qq10086..");
-        sftpDetails.put(SFTPConstants.SFTP_REQ_PORT, "22");
-        SFTPChannel channel = new SFTPChannel();
-        ChannelSftp chSftp = null;
+//        Map<String, String> sftpDetails = new HashMap<String, String>();
+//        // 设置主机ip，端口，用户名，密码
+//        sftpDetails.put(SFTPConstants.SFTP_REQ_HOST, "www.xkxxkx.cn");
+//        sftpDetails.put(SFTPConstants.SFTP_REQ_USERNAME, "root");
+//        sftpDetails.put(SFTPConstants.SFTP_REQ_PASSWORD, "qq10086..");
+//        sftpDetails.put(SFTPConstants.SFTP_REQ_PORT, "22");
+//        SFTPChannel channel = new SFTPChannel();
+//        ChannelSftp chSftp = null;
 
-        int aid= -iArticleService.selectMax()+1;
-        List <String> urlList=iArticleImgServer.selectImgByAid(aid);
-
-        for (String url :urlList){
-            if (article.getContent().indexOf(url)==-1){
-                String trueurl=url.substring(34);
-                iArticleImgServer.deleteUrl(url);
-                try{
-                    chSftp = channel.getChannel(sftpDetails, 60000);
-                    chSftp.rm("/opt/apache-tomcat-9.0.33/webapps/article/"+trueurl);
-                    channel.closeChannel();
-                }catch (SftpException e){
-
-                } catch (JSchException e) {
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+        int aid= -iArticleService.selectMax()-1;
+//        List <String> urlList=iArticleImgServer.selectImgByAid(aid);
+//
+//        for (String url :urlList){
+//            if (article.getContent().indexOf(url)==-1){
+//                String trueurl=url.substring(34);
+//                iArticleImgServer.deleteUrl(url);
+//                try{
+//                    chSftp = channel.getChannel(sftpDetails, 60000);
+//                    chSftp.rm("/opt/apache-tomcat-9.0.33/webapps/article/"+trueurl);
+//                    channel.closeChannel();
+//                }catch (SftpException e){
+//
+//                } catch (JSchException e) {
+//
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
         iArticleService.updateArticle(article);
     }
 }
