@@ -12,5 +12,4 @@ public class XkxApplication {
         SpringApplication.run(XkxApplication.class, args);
     }
 
-
 }

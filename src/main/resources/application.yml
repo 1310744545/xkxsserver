@@ -29,4 +29,3 @@ spring:
 mybatis:
   type-aliases-package: org.xkx.pojo
   mapper-locations: classpath:mybatis/mapper/*.xml
-  
