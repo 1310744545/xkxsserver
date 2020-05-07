@@ -6,6 +6,7 @@ import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.SftpException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.xkx.pojo.god;
@@ -80,7 +81,25 @@ public class GodController {
         headMap.put("headImg",headImg);
         iGodService.setHeadUrl(headMap);
         return new Result("上传成功");
-
     }
-
+    @CrossOrigin
+    @ResponseBody
+    @RequestMapping("/qqLogin")
+    public god GodNameById(@RequestBody Map<String,String> map){
+        if(iGodService.isExist(map.get("openId"))){
+            //存在
+            return iGodService.selectGodByCount(map.get("openId"));
+        }else {
+            //不存在
+            god God=new god();
+            God.setCount(map.get("openId"));
+            God.setPassword("null");
+            God.setName(map.get("name"));
+            God.setUrl("空空如也");
+            God.setIntroduction("空空如也");
+            God.setHeadImg(map.get("imgUrl"));
+            iGodService.addGod(God);
+            return God;
+        }
+    }
 }

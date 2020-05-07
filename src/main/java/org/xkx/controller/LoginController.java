@@ -61,6 +61,7 @@ public class LoginController {
         God.setName(god.getName());
         God.setUrl("空空如也");
         God.setIntroduction("空空如也");
+        God.setHeadImg("https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png");
         return iGodService.addGod(God);
     }
 
